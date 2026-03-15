@@ -134,9 +134,9 @@
 
     function getJarvisResponse(message) {
       message = message.toLowerCase();
-      if (message.includes("hi")) return " Hii Mam,this is jarvis just wanna let u know Amay love's u the most, and he wants u to become successful in ur life and achieve all ur dreams, if u wanna know more type 'more'";
-      if (message.includes("time")) return `The current time is ${new Date().toLocaleTimeString()}, at this time the world's most prettiest girl is looking at her phone and blushing `;
-      if (message.includes("more")) return `U r really a great inspiration for amey, u r the one who is his forever, for him loving u forever sounds not enough coz his love has no end, now type 'time', to know the current time`;
+      if (message.includes("hi")) return " Hii Mam,this is jarvis just wanna let u know Amay love's u the most, and he wants u to become successful in ur life and achieve all ur dreams, and to be honest he is saying he is so proud of u, i won't lie mam but, he is really lucky to have you, if u wanna know more type 'more'";
+      if (message.includes("time")) return `The current time is ${new Date().toLocaleTimeString()}, at this time the world's most prettiest girl is looking at her phone and blushing, click speak to say something `;
+      if (message.includes("more")) return `U r really a great inspiration for amay, u r the one who is his forever, for him loving u forever sounds not enough coz his love has no end, now type 'time', to know the current time`;
       return "I am still learning. Can you try asking something else, Sir?";
     }
 
@@ -162,7 +162,7 @@
       };
 
       recognition.onerror = function(event) {
-        console.error("Speech recognition error:", event.error);
+        console.error("mam you got the most beautiful and the sweetest voice in the whole world, your voice is so beautiful that now jarvis is closing. because, it's creator amay has fallen in love with your voice", event.error);
       };
     }
 
