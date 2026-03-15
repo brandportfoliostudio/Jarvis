@@ -18,17 +18,19 @@
       justify-content: center;
       overflow: hidden;
     }
+
     h1 {
       color: #00fff7;
       text-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7;
       letter-spacing: 2px;
       margin-bottom: 20px;
     }
+
     #chatbox {
       width: 90%;
       max-width: 700px;
       height: 400px;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0, 0, 0, 0.6);
       border: 1px solid #00fff7;
       border-radius: 15px;
       backdrop-filter: blur(10px);
@@ -39,55 +41,63 @@
       gap: 10px;
       box-shadow: 0 0 30px #00fff7;
     }
+
     .message {
       padding: 10px 15px;
       border-radius: 12px;
       max-width: 80%;
       animation: fadeIn 0.5s ease forwards;
     }
+
     .user {
       align-self: flex-end;
       background: #ff0055;
       color: #fff;
       box-shadow: 0 0 15px #ff0055;
     }
+
     .jarvis {
       align-self: flex-start;
       background: #00fff7;
       color: #000;
       box-shadow: 0 0 15px #00fff7;
     }
+
     @keyframes fadeIn {
-      from {opacity:0; transform: translateY(10px);}
-      to {opacity:1; transform: translateY(0);}
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
     }
+
     #controls {
       margin-top: 15px;
       display: flex;
       gap: 10px;
     }
+
     input {
       width: 60%;
       padding: 12px;
       border-radius: 10px;
       border: none;
       outline: none;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.5);
       color: #00fff7;
       box-shadow: 0 0 10px #00fff7 inset;
       font-family: 'Orbitron', sans-serif;
     }
+
     button {
       padding: 12px 20px;
       border-radius: 10px;
       border: none;
-      background: linear-gradient(45deg,#00fff7,#0ff);
+      background: linear-gradient(45deg, #00fff7, #0ff);
       color: #000;
       font-weight: bold;
       cursor: pointer;
       box-shadow: 0 0 20px #00fff7;
       transition: all 0.3s ease;
     }
+
     button:hover {
       box-shadow: 0 0 30px #00fff7, 0 0 50px #00fff7;
       transform: scale(1.05);
@@ -104,11 +114,11 @@
   </div>
 
   <script>
-    const chatbox = document.getElementById("chatbox");
-    const userInput = document.getElementById("userInput");
+    const chatbox = document.getElementById('chatbox');
+    const userInput = document.getElementById('userInput');
 
     function appendMessage(sender, message) {
-      const msg = document.createElement("div");
+      const msg = document.createElement('div');
       msg.className = `message ${sender}`;
       msg.textContent = message;
       chatbox.appendChild(msg);
@@ -122,44 +132,27 @@
       synth.speak(utterance);
     }
 
-    async function getJarvisResponse(message) {
-      // ⚠️ Replace YOUR_API_KEY_HERE with your OpenAI API key
-      const res = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type":"application/json",
-          "Authorization":"Bearer sk-ijklmnop1234qrstijklmnop1234qrstijklmnop"
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [{role:"user", content: message}]
-        })
-      });
-      const data = await res.json();
-      return data.choices[0].message.content;
+    function getJarvisResponse(message) {
+      message = message.toLowerCase();
+      if (message.includes("hi")) return "Mam,this is jarvis just wanna let u know Amey love's u the most and he wants u to become successful in ur life and achieving all ur dreams..if u wanna know more type 'more'";
+      if (message.includes("time")) return `The current time is ${new Date().toLocaleTimeString()}.at this time world's most prettiest girl is looking at her phone and blushing 🤭`;
+      if (message.includes("more")) return `U r really a great inspiration for amey ..u r the one who is his forever..fot him loving u forever sounds not enough coz his love has no end..now type 'time'`;
+      return "I am still learning. Can you try asking something else, Sir?";
     }
 
-    async function sendMessage() {
+    function sendMessage() {
       const message = userInput.value.trim();
       if (!message) return;
-
-      appendMessage("user", message);
-
-      try {
-        const reply = await getJarvisResponse(message);
-        appendMessage("jarvis", reply);
-        speak(reply);
-      } catch (err) {
-        appendMessage("jarvis","Error contacting AI!");
-        console.error(err);
-      }
-
-      userInput.value = "";
+      appendMessage('user', message);
+      const response = getJarvisResponse(message);
+      appendMessage('jarvis', response);
+      speak(response);
+      userInput.value = '';
     }
 
     function startListening() {
       const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.lang = "en-US";
+      recognition.lang = 'en-US';
       recognition.start();
 
       recognition.onresult = function(event) {
@@ -173,8 +166,8 @@
       };
     }
 
-    userInput.addEventListener("keypress", function(e){
-      if(e.key === "Enter") sendMessage();
+    userInput.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") sendMessage();
     });
   </script>
 </body>
